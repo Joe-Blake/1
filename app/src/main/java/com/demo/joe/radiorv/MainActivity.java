@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         List<ReportBean> reasons = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
-            reasons.add(i,new ReportBean(""+i));
+            reasons.add(i, new ReportBean("111111111111111999999999998888880000000000", false));
         }
 
         ReportAdapter adapter = new ReportAdapter(reasons, mRecyclerView);
@@ -34,9 +34,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClickListener(ReportBean reportBean) {
+                ok.setEnabled(true);
                 Log.i("zj", reportBean.getReason());
                 ok.setText("ok");
             }
+
+            @Override
+            public void noChecked() {
+                ok.setEnabled(false);
+            }
+
+
         });
         ok.setOnClickListener(new View.OnClickListener() {
             @Override

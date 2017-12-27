@@ -7,6 +7,12 @@ package com.demo.joe.radiorv;
 public class ReportBean {
 
     private String reason;
+    private boolean check;
+
+    public ReportBean(String reason, boolean check) {
+        this.reason = reason;
+        this.check = check;
+    }
 
     public ReportBean(String reason) {
         this.reason = reason;
@@ -16,5 +22,11 @@ public class ReportBean {
         return reason;
     }
 
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
 
+    public boolean isCheck() {
+        return check;
+    }
 }
