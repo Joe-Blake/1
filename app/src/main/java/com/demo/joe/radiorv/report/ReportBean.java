@@ -1,4 +1,4 @@
-package com.demo.joe.radiorv;
+package com.demo.joe.radiorv.report;
 
 /**
  * Created by weizijie on 2017/7/18.

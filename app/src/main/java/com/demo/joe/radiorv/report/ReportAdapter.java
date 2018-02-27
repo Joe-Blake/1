@@ -1,13 +1,14 @@
-package com.demo.joe.radiorv;
+package com.demo.joe.radiorv.report;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import com.demo.joe.radiorv.R;
 
 import java.util.List;
 

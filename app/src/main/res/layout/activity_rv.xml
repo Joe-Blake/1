@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.demo.joe.radiorv.report.RVActivity"
+    android:id="@+id/activity_report">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="#F1F2F6"
+        android:gravity="center_vertical"
+        android:paddingLeft="13dp"
+        android:text="请选择举报原因"
+        android:textSize="13sp"
+        android:id="@+id/hint"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hint"/>
+
+    <Button
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_below="@id/recycler_view"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/ok"/>
+
+</RelativeLayout>
