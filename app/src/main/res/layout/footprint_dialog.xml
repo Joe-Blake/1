@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="260dp"
-    android:orientation="vertical">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/app_color_F2F3F5">
 
     <TextView
         android:id="@+id/index"
@@ -12,14 +13,24 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"/>
 
-    <android.support.v4.view.ViewPager
+    <com.demo.joe.radiorv.footprints.MultiViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginRight="60dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/index"
-        android:clipChildren="false"/>
+        app:matchChildWidth="@+id/item_view_width"
+        android:layout_below="@+id/index"/>
+
+    <TextView
+        android:id="@+id/more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:lines="1"
+        android:layout_marginLeft="-85dp"
+        android:layout_marginRight="10dp"
+        android:text="查看更多 >"
+        android:layout_toRightOf="@+id/pager"
+        android:visibility="gone"/>
 
 </RelativeLayout>
