@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#80000000"  >
+
+    <RelativeLayout
+        android:layout_width="270dp"
+        android:layout_height="240dp"
+        android:layout_centerInParent="true"
+        android:background="@color/White">
+
+        <RelativeLayout
+            android:id="@+id/back"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/ic_launcher"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp"
+            android:text="快捷登录"/>
+
+
+        <RelativeLayout
+            android:id="@+id/input_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_marginTop="35dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <RelativeLayout
+                android:id="@+id/edit_number"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <EditText
+                    android:id="@+id/input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/get_code"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/edit_number"
+                android:background="#234567"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:text="获取验证码" />
+
+            <TextView
+                android:id="@+id/tv_tips_01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_alignLeft="@+id/get_code"
+                android:layout_below="@+id/get_code"
+                android:text="首次登录将自动注册，注册则代表您同意"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_marginTop="35dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_code_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="验证码已发送至"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/tv_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="12345678998"
+                android:layout_toRightOf="@+id/tv_code_hint"
+                android:layout_marginLeft="10dp"
+                android:maxLength="11"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/countdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_code_hint"
+                android:layout_marginTop="15dp"
+                tools:text="56s后重发"/>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/code_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="35dp"
+                android:layout_below="@+id/countdown">
+
+                <EditText
+                    android:id="@+id/verification_code1"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/verification_code2"
+                    style="@style/CodeEditText"/>
+                <EditText
+                    android:id="@+id/verification_code2"
+                    app:layout_constraintLeft_toRightOf="@+id/verification_code1"
+                    app:layout_constraintRight_toLeftOf="@+id/verification_code3"
+                    style="@style/CodeEditText"/>
+                <EditText
+                    android:id="@+id/verification_code3"
+                    app:layout_constraintLeft_toRightOf="@+id/verification_code2"
+                    app:layout_constraintRight_toLeftOf="@+id/verification_code4"
+                    style="@style/CodeEditText"/>
+                <EditText
+                    android:id="@+id/verification_code4"
+                    app:layout_constraintLeft_toRightOf="@+id/verification_code3"
+                    app:layout_constraintRight_toRightOf="parent"
+                    style="@style/CodeEditText"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_voice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/code_confirm"
+                android:layout_marginTop="10dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/voice_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#36003F"
+                    android:layout_alignParentRight="true"
+                    android:text="获取语音验证码"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_toLeftOf="@+id/voice_code"
+                    android:text="没收到？"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

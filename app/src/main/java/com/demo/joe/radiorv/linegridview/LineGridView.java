@@ -1,4 +1,4 @@
-package com.demo.joe.radiorv.view;
+package com.demo.joe.radiorv.linegridview;
 
 import android.content.Context;
 import android.graphics.Canvas;

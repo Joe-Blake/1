@@ -3,14 +3,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <com.demo.joe.radiorv.view.LineGridView
+    <com.demo.joe.radiorv.linegridview.LineGridView
         android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:numColumns="4">
 
-    </com.demo.joe.radiorv.view.LineGridView>
+    </com.demo.joe.radiorv.linegridview.LineGridView>
 
     <View
         android:layout_width="match_parent"

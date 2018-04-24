@@ -2,29 +2,38 @@ package com.demo.joe.radiorv.footprints;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.demo.joe.radiorv.MainActivity;
 import com.demo.joe.radiorv.R;
 import com.demo.joe.radiorv.utils.DisplayUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import hugo.weaving.DebugLog;
 
 /**
  * Created by weizijie on 2018/2/27.
  */
-
+@DebugLog
 public class FootprintsDialog extends Dialog {
+
+    float x1 = 0;
+    float x2 = 0;
+    float y1 = 0;
+    float y2 = 0;
 
     private Context mContext;
     private MultiViewPager mViewPager;
@@ -40,6 +49,7 @@ public class FootprintsDialog extends Dialog {
         mFootprintBeanList = footprintBeanList;
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Window dialogWindow = getWindow();
@@ -54,7 +64,15 @@ public class FootprintsDialog extends Dialog {
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "more....", Toast.LENGTH_SHORT).show();
+                dismiss();
+                final Intent intent = new Intent(mContext, MainActivity.class);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mContext.startActivity(intent);
+                    }
+                },500);
+
             }
         });
         assert dialogWindow != null;
@@ -103,5 +121,30 @@ public class FootprintsDialog extends Dialog {
         mViewPager.setAdapter(adapter);
         mViewPager.setPageTransformer(false, new FootprintTransformer(0.5f, 0.7f));
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onTouchEvent(@NonNull MotionEvent event) {
+        float x1 = 0;
+        float x2 = 0;
+        float y1 = 0;
+        float y2 = 0;
+        if(event.getAction() == MotionEvent.ACTION_DOWN) {
+            x1 = event.getX();
+            y1 = event.getY();
+        }
+        if(event.getAction() == MotionEvent.ACTION_UP) {
+            x2 = event.getX();
+            y2 = event.getY();
+            if (y1 - y2 > Math.abs(x1 - x2) && (y1 - y2) > 100) {
+                dismiss();
+            }
+        }
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(@NonNull MotionEvent ev) {
+        return super.dispatchTouchEvent(ev);
     }
 }

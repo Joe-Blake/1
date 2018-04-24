@@ -1,4 +1,4 @@
-package com.demo.joe.radiorv.view.adapter;
+package com.demo.joe.radiorv.linegridview.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -1,7 +1,11 @@
 package com.demo.joe.radiorv.footprints;
 
 import android.content.Context;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,10 +19,17 @@ import java.util.List;
  */
 
 public class PagerItem extends RelativeLayout {
-    public PagerItem(Context context, int position, List<FootprintBean> beanList) {
-        super(context);
-        LayoutInflater.from(context).inflate(R.layout.item_dropdownfootprint, this);
 
+    public PagerItem(Context context, final int position, List<FootprintBean> beanList) {
+        super(context);
+        View root = LayoutInflater.from(context).inflate(R.layout.item_dropdownfootprint, this);
+        root.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("zj", position + "");
+
+            }
+        });
         TextView textDes = (TextView) findViewById(R.id.item_des);
         textDes.setText(beanList.get(position).getName());
 
@@ -26,5 +37,7 @@ public class PagerItem extends RelativeLayout {
         textPrice.setText(beanList.get(position).getPrice());
 
         ImageView img = (ImageView) findViewById(R.id.item_img);
+
     }
+
 }

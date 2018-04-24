@@ -1,13 +1,12 @@
-package com.demo.joe.radiorv;
+package com.demo.joe.radiorv.linegridview;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.demo.joe.radiorv.utils.DisplayUtil;
-import com.demo.joe.radiorv.view.LineGridView;
-import com.demo.joe.radiorv.view.adapter.GridViewAdapter;
+import com.demo.joe.radiorv.R;
+import com.demo.joe.radiorv.linegridview.adapter.GridViewAdapter;
 
 public class CustomGirdActivity extends AppCompatActivity {
 

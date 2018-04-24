@@ -5,6 +5,8 @@ import android.content.res.TypedArray;
 import android.graphics.Point;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.demo.joe.radiorv.R;
@@ -120,5 +122,16 @@ public class MultiViewPager extends ViewPager{
 
     public void setMaxHeight(int height) {
         mMaxHeight = height;
+    }
+
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return super.onInterceptTouchEvent(ev);
     }
 }
