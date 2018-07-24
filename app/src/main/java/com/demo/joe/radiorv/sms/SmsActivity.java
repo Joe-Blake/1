@@ -1,6 +1,7 @@
 package com.demo.joe.radiorv.sms;
 
 import android.Manifest;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Handler;
@@ -15,10 +16,15 @@ import android.widget.Toast;
 
 import com.demo.joe.radiorv.R;
 
+import static android.provider.ContactsContract.Intents.Insert.ACTION;
+
 public class SmsActivity extends AppCompatActivity {
 
     private EditText code;
+
     private SmsContent mSmsContent;
+
+    private SMSBroadcastReceiver mSMSBroadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,23 +32,48 @@ public class SmsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sms);
         checkPermission();
         code = (EditText) findViewById(R.id.code);
-        mSmsContent = new SmsContent(new Handler(), this, code);
+        mSmsContent = new SmsContent(new Handler(), this, new SMSBroadcastReceiver.MessageListener() {
+            @Override
+            public void onReceived(String message) {
+                code.requestFocus();
+                code.setText(message);
+                code.setSelection(message.length());
+            }
+        });
         this.getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, mSmsContent);
     }
+
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        mSMSBroadcastReceiver = new SMSBroadcastReceiver();
+//        IntentFilter intentFilter = new IntentFilter("android.provider.Telephony.SMS_RECEIVED");
+//        intentFilter.setPriority(Integer.MAX_VALUE);
+//        this.registerReceiver(mSMSBroadcastReceiver, intentFilter);
+//        mSMSBroadcastReceiver.setOnReceivedMessageListener(new SMSBroadcastReceiver.MessageListener() {
+//            @Override
+//            public void onReceived(String message) {
+//                code.setText(message);
+//            }
+//        });
+//    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         this.getContentResolver().unregisterContentObserver(mSmsContent);
+//        this.unregisterReceiver(mSMSBroadcastReceiver);
+//        mSMSBroadcastReceiver = null;
     }
 
     private void checkPermission() {
         boolean hasPermission = (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED);
         if (!hasPermission) {
+            Toast.makeText(this, "no权限", Toast.LENGTH_SHORT).show();
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS},1);
         } else {
-
+            Toast.makeText(this, "has权限", Toast.LENGTH_SHORT).show();
         }
     }
 

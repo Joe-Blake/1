@@ -2,6 +2,7 @@ package com.demo.joe.radiorv.linegridview;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -20,6 +21,17 @@ public class CustomGirdActivity extends AppCompatActivity {
         GridViewAdapter adapter = new GridViewAdapter(this);
         setHeight(adapter);
         mLineGridView.setAdapter(adapter);
+
+        int i = 1;
+        ClassLoader classLoader = getClassLoader();
+        if (classLoader != null){
+            Log.i("zj", "[onCreate] classLoader " + i++ + " : " + classLoader.toString());
+            while (classLoader.getParent()!=null){
+                classLoader = classLoader.getParent();
+                Log.i("zj","[onCreate] classLoader " + i++ + " : " + classLoader.toString());
+            }
+        }
+
     }
 
     private void setHeight(GridViewAdapter adapter) {

@@ -19,13 +19,14 @@ import java.util.regex.Pattern;
 public class SmsContent extends ContentObserver {
     private Cursor cursor = null;
     private Context context;
-    private EditText setText;
     private String smsID = "";
 
-    public SmsContent(Handler handler, Context context, EditText codeEditText) {
+    private SMSBroadcastReceiver.MessageListener mMessageListener;
+
+    public SmsContent(Handler handler, Context context, SMSBroadcastReceiver.MessageListener listener) {
         super(handler);
         this.context = context;
-        this.setText = codeEditText;
+        mMessageListener = listener;
     }
 
     @Override
@@ -41,15 +42,17 @@ public class SmsContent extends ContentObserver {
         Log.i("SMSTest","cursor.isBeforeFirst(): " + cursor.isBeforeFirst() + " cursor.getCount():  " + cursor.getCount());
         if (cursor != null && cursor.getCount() > 0) {
             Log.i("SMSTest", "smsID--" + smsID);
+            Log.i("SMSTest", "_id--" + cursor.getColumnIndex("_id"));
             cursor.moveToFirst();
-            if (cursor.getString(cursor.getColumnIndex("_id")).equals(smsID)) {
+//            if (cursor.getString(cursor.getColumnIndex("_id")).equals(smsID)) {
                 int smsbodyColumn = cursor.getColumnIndex("body");
                 String smsBody = cursor.getString(smsbodyColumn);
                 Log.i("SMSTest","smsBody = " + smsBody);
-                setText.requestFocus();
-                setText.setText(getDynamicPassword(smsBody));
-                setText.setSelection(setText.getText().length());
-            }
+                if (smsBody.substring(0, 6).equals("【58到家】")) {
+                    String code = getDynamicPassword(smsBody);
+                    mMessageListener.onReceived(code);
+                }
+//            }
             smsID = cursor.getString(cursor.getColumnIndex("_id"));
         }
     }
