@@ -111,5 +111,4 @@ public class MyApplicationLike extends DefaultApplicationLike {
             Application.ActivityLifecycleCallbacks callbacks) {
         getApplication().registerActivityLifecycleCallbacks(callbacks);
     }
-
 }

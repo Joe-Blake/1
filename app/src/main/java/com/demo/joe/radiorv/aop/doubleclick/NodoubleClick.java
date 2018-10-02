@@ -12,8 +12,6 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect
 public class NodoubleClick {
 
-    final String TAG = NodoubleClick.class.getSimpleName();
-
     @Around("execution(* android.view.View.OnClickListener.onClick(..))")
     public void onClickLitener(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         Log.e("zj", "OnClick");

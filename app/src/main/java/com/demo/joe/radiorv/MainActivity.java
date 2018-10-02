@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.demo.joe.butterknife.ButterKnife;
+import com.demo.joe.butterknife_annotations.BindView;
+import com.demo.joe.radiorv.eventbus.EventBusActivity;
 import com.demo.joe.radiorv.footprints.FootprintsActivity;
 import com.demo.joe.radiorv.report.RVActivity;
 import com.demo.joe.radiorv.linegridview.CustomGirdActivity;
@@ -24,8 +27,11 @@ public class MainActivity extends AppCompatActivity {
     private Button footprints;
     private Button lineGridView;
     private Button transslucent;
-    private Button code;
-    private Button click;
+    @BindView(R.id.code)
+    public Button code;
+
+    @BindView(R.id.click)
+    public Button click;
 
     private TextView t;
 
@@ -34,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        EventBus.getDefault().register(this);
+        ButterKnife.bind(this);
 
         radioRV = (Button) findViewById(R.id.radio);
         radioRV.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        code = (Button) findViewById(R.id.code);
         code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,11 +85,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        click = (Button) findViewById(R.id.click);
+//        click = (Button) findViewById(R.id.click);
         click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("zj", "click success");
+                Intent i = new Intent(MainActivity.this, EventBusActivity.class);
+                startActivity(i);
             }
         });
 

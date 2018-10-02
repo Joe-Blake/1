@@ -1,5 +1,6 @@
 package com.demo.joe.radiorv.report;
 
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.demo.joe.radiorv.R;
+import com.demo.joe.radiorv.utils.CommonStringUtils;
 
 import java.util.List;
 
@@ -29,6 +31,14 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReasonView
     public ReportAdapter(List<ReportBean> reasons,RecyclerView rv) {
         this.reasons = reasons;
         mRv = rv;
+    }
+
+    public ReportAdapter(RecyclerView rv) {
+        mRv = rv;
+    }
+
+    public void setReasons(List<ReportBean> reasons) {
+        this.reasons = reasons;
     }
 
     public void setOnItemClickListener(OnItemClickListener clickListener) {
@@ -100,6 +110,23 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReasonView
             reason = (TextView) itemView.findViewById(R.id.reason);
             img = (ImageView) itemView.findViewById(R.id.ring);
             flag = false;
+
+            String a = "2D0081";
+            String b = "8B3097";
+            String c = "D14E7A";
+
+//            int colors[] = { 0xff2D0081 , 0xff8B3097, 0xffD14E7A };
+            int colors[] = {CommonStringUtils.parseColor(a), CommonStringUtils.parseColor(b), CommonStringUtils
+                    .parseColor(c)};
+
+            GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, colors);
+            int sdk = android.os.Build.VERSION.SDK_INT;
+            if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                reason.setBackgroundDrawable(bg);
+            } else {
+                reason.setBackground(bg);
+            }
+
 
         }
     }

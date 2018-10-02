@@ -1,12 +1,47 @@
 package com.demo.joe.radiorv.utils;
 
+import android.support.annotation.Size;
+
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CommonStringUtils {
     private CommonStringUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
+    }
+
+
+    public static String stampToDate(long l) {
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        long lt = l;
+        Date date = new Date(lt);
+        res = simpleDateFormat.format(date);
+        return res;
+    }
+
+
+    /**
+     * 将时间转换为时间戳
+     * @param s
+     * @return
+     */
+    public static long dateToStamp(String s) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(s);
+            return date.getTime();
+        } catch (java.text.ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return -1;
+        }
+
     }
 
     /**
@@ -357,6 +392,21 @@ public class CommonStringUtils {
             return false;
         }
         return true;
+    }
+
+    public static int parseColor(@Size(min=1) String colorString) {
+        long color;
+        if (colorString.charAt(0) == '#') {
+            color = Long.parseLong(colorString.substring(1), 16);
+        } else {
+            color = Long.parseLong(colorString, 16);
+        }
+//        if (colorString.length() == 7) {
+//            color |= 0x00000000ff000000;
+//        } else if (colorString.length() != 9) {
+//            throw new IllegalArgumentException("Unknown color");
+//        }
+        return (int)color;
     }
 
 }
